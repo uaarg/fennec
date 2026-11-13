@@ -1,0 +1,18 @@
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+runner = "probe-rs run --chip STM32F407VGTx"
+rustflags = [
+  "-C", "linker=flip-link",
+  "-C", "link-arg=-Tlink.x",
+  "-C", "link-arg=-Tdefmt.x",
+]
+
+[alias]
+build-emu = ["build", "--no-default-features", "--features", "emulation", "--target-dir", "target/emulation"]
+run-emu = ["run", "--no-default-features", "--features", "emulation", "--target-dir", "target/emulation",
+           "--config", "target.thumbv7em-none-eabihf.runner = 'renode/run.sh'"]
+
+[env]
+DEFMT_LOG = "info"

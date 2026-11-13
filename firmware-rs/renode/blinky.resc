@@ -1,0 +1,19 @@
+# Usage (from firmware-rs/): cargo build-emu && renode renode/blinky.resc
+
+$repl?=@renode/discovery.repl
+$bin?=@target/emulation/thumbv7em-none-eabihf/debug/blinky
+
+mach create "discovery"
+machine LoadPlatformDescription $repl
+
+showAnalyzer sysbus.usart2
+logLevel 0 sysbus.gpioPortD.UserLED
+machine StartGdbServer 3333
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+runMacro $reset
+
+start

@@ -1,0 +1,14 @@
+using "platforms/boards/stm32f4_discovery.repl"
+
+led_orange: Miscellaneous.LED @ gpioPortD
+led_red: Miscellaneous.LED @ gpioPortD
+led_blue: Miscellaneous.LED @ gpioPortD
+
+gpioPortD:
+    13 -> led_orange@0
+    14 -> led_red@0
+    15 -> led_blue@0
+
+// Renode's timers ignore RCC. Match the firmware's TIM2 clock (16 MHz HSI).
+timer2:
+    frequency: 16000000

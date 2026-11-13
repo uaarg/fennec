@@ -1,0 +1,9 @@
+# Rust build output
+firmware-rs/target/
+
+# Renode test results (renode-test writes these to the current directory)
+robot_output.xml
+log.html
+report.html
+logs/
+snapshots/
